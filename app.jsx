@@ -1,27 +1,31 @@
-import { useState } from 'react'
-import './App.css'
-
-
+import React, { useState, useEffect } from 'react';
 
 
 function TuComponente() {
-
   const [nombre, setNombre] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [comentarios, setComentarios] = useState([]);
 
+  // Cargar comentarios desde el localStorage al cargar la página
+  useEffect(() => {
+    const storedComentarios = JSON.parse(localStorage.getItem('comentarios'));
+    if (storedComentarios) {
+      setComentarios(storedComentarios);
+    }
+  }, []);
 
   const handleSubmit = (e) => {
-    e.preventDefault();     
-      const nuevoComentario = { nombre, mensaje };
+    e.preventDefault();
+    const nuevoComentario = { nombre, mensaje };
+    setComentarios([...comentarios, nuevoComentario]);
+    setNombre('');
+    setMensaje('');
+  };
 
-
-      setComentarios([...comentarios, nuevoComentario]);
-
-         setNombre('');
-      setMensaje('');
-    }
-  
+  // Guardar comentarios en el localStorage cuando cambian
+  useEffect(() => {
+    localStorage.setItem('comentarios', JSON.stringify(comentarios));
+  }, [comentarios]);
 
   return (
     <div>
@@ -46,17 +50,23 @@ function TuComponente() {
         </div>
         <button type="submit">Enviar</button>
       </form>
+
       <div>
         <h2>Lista de Comentarios:</h2>
         <ul>
-          {comentarios.map((comentario, i) => (<li key={i}>
+          {comentarios.map((comentario, i) => (
+            <li key={i}>
               <strong>{comentario.nombre}:</strong> {comentario.mensaje}
-            </li>))}
+            </li>
+          ))}
         </ul>
       </div>
+
+     
     </div>
   );
-          }
+}
+
+export default TuComponente;
 
 
-export default TuComponente
