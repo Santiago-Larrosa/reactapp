@@ -5,9 +5,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./index.css";
-import Root from "./routes/root";
-import App from "./routes/App";
-import Coment from "./routes/comentarios";
+import Root from "./root/root";
+import App from "./root/App";
+import Coment from "./root/comentarios";
 
 
 const router = createBrowserRouter([
