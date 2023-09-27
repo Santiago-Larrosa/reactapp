@@ -1,4 +1,6 @@
+
 import React from "react";
+import {useState, useEffect} from "react";
 
 
 export default function Comentarios() {
@@ -16,9 +18,12 @@ export default function Comentarios() {
         <h2>Lista de Comentarios:</h2>
         <ul>
           {comentarios.map((comentario, index) => (
-            <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}</p>
+            <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}: {comentario.id+index} </p>
           ))}
         </ul>
+        <button>
+                <a href={`/`}>Inicio</a>
+              </button>
       </div>
     </>
   );
