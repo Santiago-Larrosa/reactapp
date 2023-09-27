@@ -1,12 +1,36 @@
+// TuComponente.js
 import React, { useState, useEffect } from 'react';
+import { useHistory } from "react-router-dom";
 
 
+ 
 function TuComponente() {
   const [nombre, setNombre] = useState('');
   const [mensaje, setMensaje] = useState('');
   const [comentarios, setComentarios] = useState([]);
-
-  // Cargar comentarios desde el localStorage al cargar la página
+  const [textoComentario, setTextoComentario] = useState('');
+  const history = useHistory()
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const nuevoComentario = {
+        nombre,
+        mensaje,
+        textoComentario,
+      }
+      history.push('/comentarios');;
+      setComentarios([...comentarios, nuevoComentario]);
+      setNombre('');
+      setMensaje('');
+      setTextoComentario('');
+    };
+  const saveComentarios = () => {
+    localStorage.setItem('comentarios', JSON.stringify(comentarios));
+  };
+  useEffect(() => {
+    if (comentarios.length) {
+      saveComentarios();
+    }
+  }, [comentarios]);
   useEffect(() => {
     const storedComentarios = JSON.parse(localStorage.getItem('comentarios'));
     if (storedComentarios) {
@@ -14,18 +38,7 @@ function TuComponente() {
     }
   }, []);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const nuevoComentario = { nombre, mensaje };
-    setComentarios([...comentarios, nuevoComentario]);
-    setNombre('');
-    setMensaje('');
-  };
 
-  // Guardar comentarios en el localStorage cuando cambian
-  useEffect(() => {
-    localStorage.setItem('comentarios', JSON.stringify(comentarios));
-  }, [comentarios]);
 
   return (
     <div>
@@ -48,17 +61,26 @@ function TuComponente() {
             onChange={(e) => setMensaje(e.target.value)}
           />
         </div>
-        <button>
-                <a href={`/comentarios`}>Crear comentario</a>
-              </button>
+        <div>
+          <label htmlFor="textoComentario">Texto del comentario:</label>
+          <input
+            type="text"
+            id="textoComentario"
+            value={textoComentario}
+            onChange={(e) => setTextoComentario(e.target.value)}
+          />
+        </div>
+        <button >Crear comentario</button>
       </form>
 
-      
-
-     
+      {comentarios.map((comentario, index) => (
+        <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}</p>
+      ))}
     </div>
   );
 }
 
 export default TuComponente;
+
+
 
