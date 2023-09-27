@@ -32,7 +32,7 @@ export default function Root() {
                 <a href={`/App`}>Crear comentario</a>
               </li>
               <li>
-                <a href={`/Coment`}>Crear comentario</a>
+                <a href={`/comentarios`}>Crear comentario</a>
               </li>
             </ul>
           </nav>
