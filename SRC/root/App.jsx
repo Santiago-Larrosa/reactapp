@@ -1,85 +1,94 @@
-import React from "react";
-import {useState, useEffect} from "react";
+// TuComponente.js
+import React, { useState, useEffect } from 'react';
+//import { useHistory } from "react-router-dom";
 
-export default function Root() {
+
+ 
+function TuComponente() {
+  const [nombre, setNombre] = useState('');
+  const [mensaje, setMensaje] = useState('');
+  const [id, setid] = useState(0);
   const [comentarios, setComentarios] = useState([]);
-  const [id, setid] = useState(undefined);
-
-
+  const [textoComentario, setTextoComentario] = useState('');
+  //const history = useHistory()
+    const handleSubmit = (e) => {
+     // setid(id++);
+      e.preventDefault();
+      const nuevoComentario = {
+        nombre,
+        mensaje,
+        textoComentario,
+        id,
+      }
+     // history.push('/comentarios');;
+      setComentarios([...comentarios, nuevoComentario]);
+      setNombre('');
+      setMensaje('');
+      setTextoComentario('');
+    };
+  const saveComentarios = () => {
+    localStorage.setItem('comentarios', JSON.stringify(comentarios));
+  };
   useEffect(() => {
-    // Obtén los comentarios de localStorage
-    const comentariosJson = localStorage.getItem('comentarios');
-
-    // Asigna los comentarios al estado
-    setComentarios(comentariosJson ? JSON.parse(comentariosJson) : []);
-
-    // Espera a que el componente reciba una solicitud HTTP del navegador
-   
+    if (comentarios.length) {
+      saveComentarios();
+    }
+  }, [comentarios]);
+  useEffect(() => {
+    const storedComentarios = JSON.parse(localStorage.getItem('comentarios'));
+    if (storedComentarios) {
+      setComentarios(storedComentarios);
+    }
   }, []);
 
+
+
   return (
-    <>
-      <div id="sidebar">
-        <h1>Pagina para crear comentario</h1>
+    <div>
+      <h1>Comentarios</h1>
+      <form onSubmit={handleSubmit}>
         <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
-          <form method="post">
-            <button type="submit">New</button>
-          </form>
+          <label htmlFor="nombre">Nombre:</label>
+          <input
+            type="text"
+            id="nombre"
+            value={nombre}
+            onChange={(e) => setNombre(e.target.value)}
+          />
         </div>
-        <nav>
-          <ul>
-            <li>
-              <a href={`/App`}>Crear comentario</a>
-            </li>
-           
-             
-            </ul>
-          </nav>
-          <div>
-        <h2>Lista de Comentarios:</h2>
-        <ul>
-        
-        
-              {comentarios.map((comentario, index) => (
-                <p key={index}>
-                  {comentario.nombre}: {comentario.mensaje}:
-                  {comentario.textoComentario}: {comentario.id + index}
-                  <button
-                    onClick={setid(comentario.id)}
-                    
-                  >
-                    <a href={`/Coment?id=${id}`}>Comentar</a>
-                  </button>
-                </p>
-              ))}
-  
-        </ul>
-      </div>
+        <div>
+          <label htmlFor="mensaje">Mensaje:</label>
+          <textarea
+            id="mensaje"
+            value={mensaje}
+            onChange={(e) => setMensaje(e.target.value)}
+          />
         </div>
-        <div id="detail"></div>
-      </>
+       {/* <div> 
+          <label htmlFor="textoComentario">Texto del comentario:</label>
+          <input
+            type="text"
+            id="textoComentario"
+            value={textoComentario}
+            onChange={(e) => setTextoComentario(e.target.value)}
+          />
+       </div>*/}
+        <button >Crear comentario</button>
+        <button>
+                <a href={`/comentarios`}>Ver comentarios</a>
+              </button>
+      </form>
+
+     {/* {comentarios.map((comentario, index) => (
+        <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}</p>
+     ))}*/}
+    </div>
   );
 }
 
 export default TuComponente;
+
+
 
 
 
