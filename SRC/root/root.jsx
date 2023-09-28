@@ -1,20 +1,30 @@
-import React from "react";
-import {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
-  const [id, setid] = useState(undefined);
+  const [id, setid] = useState();
+  const [go, setgo] = useState();
 
+  const HandleClick = () => {
+    setgo(id);
+  };
 
   useEffect(() => {
     // Obtén los comentarios de localStorage
     const comentariosJson = localStorage.getItem('comentarios');
 
     // Asigna los comentarios al estado
-    setComentarios(comentariosJson ? JSON.parse(comentariosJson) : []);
-
-    // Espera a que el componente reciba una solicitud HTTP del navegador
-   
+    useEffect(() => {
+      // Obtén el ID del comentario del parámetro
+      const queryParams = new URLSearchParams(window.location.search);
+      const idParam = queryParams.get("id");
+    
+      // Establece el valor de go si idParam no es nulo
+      if (idParam) {
+        setgo(idParam);
+      }
+    }, []);
+    
   }, []);
 
   return (
@@ -58,15 +68,13 @@ export default function Root() {
         <ul>
         
         
-              {comentarios.map((comentario, index) => (
-                <p key={index}>
-                  {comentario.nombre}: {comentario.mensaje}:
-                  {comentario.textoComentario}: {comentario.id + index}
+        {comentarios.map((comentario, index) => (
+            <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}: {comentario.id+index}
                   <button
-                    onClick={setid(comentario.id)}
+                    onClick={HandleClick}
                     
                   >
-                    <a href={`/Coment?id=${id}`}>Comentar</a>
+                    <a href={`/Coment?id=${go}`}>Comentar</a>
                   </button>
                 </p>
               ))}
@@ -78,9 +86,3 @@ export default function Root() {
       </>
   );
 }
-
-        </div>
-        <div id="detail"></div>
-      </>
-    );
-  }
