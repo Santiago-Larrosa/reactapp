@@ -4,11 +4,11 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import "./index.css";
-import Root from "./root/root";
-import App from "./root/App";
-import Comentarios from "./root/comentarios";
-import Coment from "./root/coment";
+import "./SRC/index.css";
+import Root from "./SRC/root/root";
+import App from "./SRC/root/App";
+import Comentarios from "./SRC/root/comentarios";
+import Coment from "./SRC/root/coment";
 
 
 const router = createBrowserRouter([
