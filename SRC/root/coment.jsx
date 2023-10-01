@@ -1,46 +1,126 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import "./comentStyle.css";
 
 export default function Coment() {
+  const { id } = useParams();
+  const [comentariosDelComentario, setComentariosDelComentario] = useState([]);
+  let idNumero = parseInt(id);
   const [comentarios, setComentarios] = useState([]);
-  const [id, setid] = useState(0);
-  const [go, setgo] = useState(0);
+  const [comentarioSeleccionado, setComentarioSeleccionado] = useState(null);
+  const [nombreComentario, setNombreComentario] = useState("");
+  const [mensajeComentario, setMensajeComentario] = useState("");
+  const [contadorID, setContadorID] = useState(1);
+
+  if (isNaN(idNumero)) {
+    console.error("ID proporcionado no es un número válido:", id);
+  }
 
   useEffect(() => {
     const comentariosJson = localStorage.getItem("comentarios");
-  setComentarios(comentariosJson ? JSON.parse(comentariosJson) : []);
-
-    // Obtén el id del comentario del parámetro
-    const queryParams = new URLSearchParams(window.location.search);
-  const idParam = queryParams.get("id");
-  setgo(idParam);
-
-    // Si el objeto comentarios está vacío, muestra un mensaje de error
-    if (comentarios.length === 0) {
-      console.error("No hay comentarios");
+    if (comentariosJson) {
+      const comentariosArray = JSON.parse(comentariosJson);
+      setComentarios(comentariosArray);
     }
-  }, []);
+
+    if (id) {
+      const comentario = comentarios.find((comentario) => comentario.id === parseInt(id));
+      setComentarioSeleccionado(comentario);
+    }
+  }, [id, comentarios]);
+  useEffect(() => {
+    const comentariosDelComentarioJson = localStorage.getItem(`comentariosDelComentario-${id}`);
+    if (comentariosDelComentarioJson) {
+      const comentariosDelComentarioArray = JSON.parse(comentariosDelComentarioJson);
+      setComentariosDelComentario(comentariosDelComentarioArray);
+    }
+  }, [id, comentarios]);
+
+  const handleAgregarComentario = (e) => {
+    e.preventDefault();
+
+    
+    const nuevoComentario = {
+      nombre: nombreComentario,
+      mensaje: mensajeComentario,
+      id: contadorID, 
+    };
+
+   
+    setContadorID(contadorID + 1);
+
+    
+    const nuevosComentariosDelComentario = [...comentariosDelComentario, nuevoComentario];
+    setComentariosDelComentario(nuevosComentariosDelComentario);
+
+   
+    setNombreComentario("");
+    setMensajeComentario("");
+
+
+    localStorage.setItem(`comentariosDelComentario-${id}`, JSON.stringify(nuevosComentariosDelComentario));
+  };
 
   return (
-    <>
-      <div>
-        <h2>Detalle del comentario</h2>
+    <div>
+      <h2 className="titulazo">COMENTAR</h2>
+      <h2 className="titulazo1">COMENTAR</h2>
+      <h2 className="titulazo2">COMENTAR</h2>
 
-        {comentarios.filter((comentario) => {
-          return comentario.id === go;
-        }).map((comentario, index) => {
-          // Agrega un if para comprobar si el comentario coincide con go
-          if (comentario.id === go) {
-            return (
-              <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}: {comentario.id+index} </p>
-            );
-          }
-        })}
+      {comentarioSeleccionado ? (
+        <div >
+          <div className="PostComent">
+          <p>
+            <b> {comentarioSeleccionado.nombre}</b><br />
+            {comentarioSeleccionado.mensaje}<br />
+          
+          </p>
+          </div>
 
-        <button>
-                <a href={`/`}>Inicio</a>
-              </button>
-      </div>
-    </>
+          <form onSubmit={handleAgregarComentario}>
+            <div>
+              <label htmlFor="nombre"></label>
+              <input
+                className="InNom"
+                placeholder="Nombre"
+                type="text"
+                id="nombre"
+                value={nombreComentario}
+                onChange={(e) => setNombreComentario(e.target.value)}
+              />
+            </div>
+            <div>
+              <label htmlFor="mensaje"></label>
+              <textarea
+              placeholder="Mensaje"
+                className="InMens"
+                id="mensaje"
+                value={mensajeComentario}
+                onChange={(e) => setMensajeComentario(e.target.value)}
+              />
+            </div>
+            <button className="Botonation">Enviar Comentario</button>
+          </form>
+
+          <div>
+            <h2>Comentarios:</h2>
+            <ul className="Coment">
+              {comentariosDelComentario.map((comentario) => (
+                <li key={comentario.id}>
+                  <strong>{comentario.nombre}:</strong> {comentario.mensaje}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ) : (
+        <p >El comentario no se encontró o no existe: {id}</p>
+      )}
+
+      <button className="botonsito">
+        <a href="/">Inicio</a>
+      </button>
+    </div>
   );
 }
+
