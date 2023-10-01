@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <Comentarios />,
   },
   {
-    path: "coment/:id", // Define un parámetro en la ruta
+    path: "coment/:id", 
     element: <Coment />,
   },
 ]);
