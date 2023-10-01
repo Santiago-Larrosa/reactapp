@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import "./index.css";
 import Root from "./root/root";
-import App from "./root/App";
+import App from "./root/App.jsx";
 import Comentarios from "./root/comentarios";
 import Coment from "./root/coment";
 
