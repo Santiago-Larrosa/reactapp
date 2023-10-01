@@ -1,39 +1,49 @@
-// TuComponente.js
 import React, { useState, useEffect } from 'react';
-//import { useHistory } from "react-router-dom";
+import './Appstyle.css';
 
-
- 
 function TuComponente() {
   const [nombre, setNombre] = useState('');
   const [mensaje, setMensaje] = useState('');
-  const [id, setid] = useState(0);
   const [comentarios, setComentarios] = useState([]);
-  const [textoComentario, setTextoComentario] = useState('');
-  //const history = useHistory()
-    const handleSubmit = (e) => {
-     // setid(id++);
-      e.preventDefault();
-      const nuevoComentario = {
-        nombre,
-        mensaje,
-        textoComentario,
-        id,
-      }
-     // history.push('/comentarios');;
-      setComentarios([...comentarios, nuevoComentario]);
-      setNombre('');
-      setMensaje('');
-      setTextoComentario('');
+  const fechaInicial = new Date();
+  const [hora, sethora] = useState(fechaInicial);
+  
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const nuevahora = new Date();
+        sethora(nuevahora);
+      const nuevahoras=(nuevahora.getHours().toString().padStart(2,0));  
+      const nuevaminuto=(nuevahora.getMinutes().toString().padStart(2,0));  
+      const nuevasegundos=(nuevahora.getSeconds().toString().padStart(2,0));  
+    const nuevoId = comentarios.length + 1;
+    
+    const nuevoComentario = {
+      nombre,
+      mensaje,
+      id: nuevoId,
+      hora:(nuevahoras),
+      minutos:(nuevaminuto),
+      segundos:(nuevasegundos)
+
     };
+
+    setComentarios([...comentarios, nuevoComentario]);
+    setNombre('');
+    setMensaje('');
+  };
+
   const saveComentarios = () => {
     localStorage.setItem('comentarios', JSON.stringify(comentarios));
   };
+
   useEffect(() => {
     if (comentarios.length) {
       saveComentarios();
     }
   }, [comentarios]);
+
   useEffect(() => {
     const storedComentarios = JSON.parse(localStorage.getItem('comentarios'));
     if (storedComentarios) {
@@ -41,55 +51,40 @@ function TuComponente() {
     }
   }, []);
 
-
-
   return (
     <div>
-      <h1>Comentarios</h1>
+      <h1 className="titulo"> <i>CREAR POST </i></h1>
+      <h1 className="titulo1"> <i>CREAR POST </i></h1>
+      <h1 className="titulo2"> <i>CREAR POST </i></h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="nombre">Nombre:</label>
+          <label className="Nombre" htmlFor="nombre"></label>
           <input
+          className='InNombre'
             type="text"
             id="nombre"
+            placeholder='Nombre'
             value={nombre}
             onChange={(e) => setNombre(e.target.value)}
           />
         </div>
         <div>
-          <label htmlFor="mensaje">Mensaje:</label>
+          <label className="Posting" htmlFor="mensaje"></label>
           <textarea
+          className='InPost'
             id="mensaje"
+            placeholder='Post'
             value={mensaje}
             onChange={(e) => setMensaje(e.target.value)}
           />
         </div>
-       {/* <div> 
-          <label htmlFor="textoComentario">Texto del comentario:</label>
-          <input
-            type="text"
-            id="textoComentario"
-            value={textoComentario}
-            onChange={(e) => setTextoComentario(e.target.value)}
-          />
-       </div>*/}
-        <button >Crear comentario</button>
-        <button>
-                <a href={`/comentarios`}>Ver comentarios</a>
-              </button>
+        <button className='botonazo'>Crear Post</button>
+     
       </form>
-
-     {/* {comentarios.map((comentario, index) => (
-        <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}</p>
-     ))}*/}
+      <button className='botonazo2'><a  href="/"> Inicio</a></button>
     </div>
   );
 }
 
 export default TuComponente;
-
-
-
-
-
 
