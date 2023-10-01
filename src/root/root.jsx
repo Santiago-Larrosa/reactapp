@@ -43,7 +43,7 @@ export default function Root() {
         </div>
         <nav>
          
-              <a href={`/App`} className="Create"><i>POST</i></a>
+              <a href={`App`} className="Create"><i>POST</i></a>
            
           </nav>
           <div>
