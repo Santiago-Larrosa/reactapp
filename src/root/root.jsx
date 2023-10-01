@@ -7,23 +7,20 @@ export default function Root() {
 
 
   const HandleClick = (id) => {
-    setGo(id); // Actualiza go con el ID del comentario
+    setGo(id);
     
   };
 
   useEffect(() => {
-    // Obtén los comentarios de localStorage o de donde sea necesario y actualiza setComentarios
     const comentariosJson = localStorage.getItem("comentarios");
     if (comentariosJson) {
       const comentariosArray = JSON.parse(comentariosJson);
       setComentarios(comentariosArray);
     }
 
-    // Obtén el ID del comentario del parámetro
     const queryParams = new URLSearchParams(window.location.search);
     const idParam = queryParams.get("id");
 
-    // Establece el valor de go si idParam no es nulo
     if (idParam) {
       setGo(idParam);
     }
