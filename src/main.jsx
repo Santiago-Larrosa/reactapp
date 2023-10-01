@@ -13,19 +13,19 @@ import Coment from "./root/coment";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "",
     element: <Root />,
   },
   {
-    path: "/App",
+    path: "App",
     element: <App />,
   },
   {
-    path: "/comentarios",
+    path: "comentarios",
     element: <Comentarios />,
   },
   {
-    path: "/coment/:id", // Define un parámetro en la ruta
+    path: "coment/:id", // Define un parámetro en la ruta
     element: <Coment />,
   },
 ]);
