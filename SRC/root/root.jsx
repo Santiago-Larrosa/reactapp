@@ -1,83 +1,67 @@
 import React, { useState, useEffect } from "react";
-
+import './rootstyle.css';
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
-  const [id, setid] = useState();
-  const [go, setgo] = useState();
+  const [go, setGo] = useState(null); 
+ 
 
-  const HandleClick = () => {
-    setgo(id);
+
+  const HandleClick = (id) => {
+    setGo(id); // Actualiza go con el ID del comentario
+    
   };
 
   useEffect(() => {
-    // Obtén los comentarios de localStorage
-    const comentariosJson = localStorage.getItem('comentarios');
+    // Obtén los comentarios de localStorage o de donde sea necesario y actualiza setComentarios
+    const comentariosJson = localStorage.getItem("comentarios");
+    if (comentariosJson) {
+      const comentariosArray = JSON.parse(comentariosJson);
+      setComentarios(comentariosArray);
+    }
 
-    // Asigna los comentarios al estado
-    useEffect(() => {
-      // Obtén el ID del comentario del parámetro
-      const queryParams = new URLSearchParams(window.location.search);
-      const idParam = queryParams.get("id");
-    
-      // Establece el valor de go si idParam no es nulo
-      if (idParam) {
-        setgo(idParam);
-      }
-    }, []);
-    
+    // Obtén el ID del comentario del parámetro
+    const queryParams = new URLSearchParams(window.location.search);
+    const idParam = queryParams.get("id");
+
+    // Establece el valor de go si idParam no es nulo
+    if (idParam) {
+      setGo(idParam);
+    }
   }, []);
+    
+ 
 
   return (
     <>
       <div id="sidebar">
-        <h1>Pagina para crear comentario</h1>
+        <h1 className="titulos">COMENTAR</h1>
         <div>
-          <form id="search-form" role="search">
-            <input
-              id="q"
-              aria-label="Search contacts"
-              placeholder="Search"
-              type="search"
-              name="q"
-            />
-            <div
-              id="search-spinner"
-              aria-hidden
-              hidden={true}
-            />
-            <div
-              className="sr-only"
-              aria-live="polite"
-            ></div>
-          </form>
+         
           <form method="post">
-            <button type="submit">New</button>
+            
           </form>
         </div>
         <nav>
-          <ul>
-            <li>
-              <a href={`/App`}>Crear comentario</a>
-            </li>
+         
+              <a href={`/App`} className="Create"><i>POST</i></a>
            
-             
-            </ul>
           </nav>
           <div>
-        <h2>Lista de Comentarios:</h2>
+          <h2 className="subtitulo1">LISTA DE COMENTARIOS</h2>
+          <h2 className="subtitulo2">LISTA DE COMENTARIOS</h2>
+        <h2 className="subtitulo">LISTA DE COMENTARIOS</h2>
         <ul>
         
         
         {comentarios.map((comentario, index) => (
-            <p key={index}>{comentario.nombre}: {comentario.mensaje}: {comentario.textoComentario}: {comentario.id+index}
-                  <button
-                    onClick={HandleClick}
-                    
-                  >
-                    <a href={`/Coment?id=${go}`}>Comentar</a>
-                  </button>
-                </p>
-              ))}
+  <div key={index} className="Post">
+    <h2 className="tituloPost">{comentario.nombre} </h2><p>{comentario.mensaje}</p>  <p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
+    <button onClick={() => HandleClick(comentario.id)} className="Boton">
+  <a onClick={()=>console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>COMENTAR</a>
+</button>
+
+  </div>
+))}
   
         </ul>
       </div>
