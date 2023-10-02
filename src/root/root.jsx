@@ -30,6 +30,10 @@ export default function Root() {
 
   return (
     <>
+    <header className="Head">
+    <img src=".\SRC\root\520648.png" alt="mensaje" className="imagen" />
+      <h1 className="AlgunTitulo">Comentar</h1>
+    </header>
       <div id="sidebar">
         <h1 className="titulos">COMENTAR</h1>
         <div>
@@ -40,13 +44,13 @@ export default function Root() {
         </div>
         <nav>
          
-              <a href={`/App`} className="Create"><i>POST</i></a>
+              <a href={`/App`} className="Create"><i>CREAR POST</i></a>
            
           </nav>
           <div>
-          <h2 className="subtitulo1">LISTA DE COMENTARIOS</h2>
-          <h2 className="subtitulo2">LISTA DE COMENTARIOS</h2>
-        <h2 className="subtitulo">LISTA DE COMENTARIOS</h2>
+          <h2 className="subtitulo1">LISTA DE POST</h2>
+          <h2 className="subtitulo2">LISTA DE POST</h2>
+        <h2 className="subtitulo">LISTA DE POST</h2>
         <ul>
         
         
