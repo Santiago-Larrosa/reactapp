@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./comentStyle.css";
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'; 
 
 export default function Coment() {
   const { id } = useParams();
@@ -62,17 +64,21 @@ export default function Coment() {
   };
 
   return (
-    <div>
-      <h2 className="titulazo">COMENTAR</h2>
-      <h2 className="titulazo1">COMENTAR</h2>
-      <h2 className="titulazo2">COMENTAR</h2>
+<>
+<header className="Head">
+    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
+    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
+      
+    </header>
+<div>
+
 
       {comentarioSeleccionado ? (
         <div >
           <div className="PostComent">
           <p>
             <b> {comentarioSeleccionado.nombre}</b><br />
-            {comentarioSeleccionado.mensaje}<br />
+            <Markdown remarkPlugins={[remarkGfm]}>{comentarioSeleccionado.mensaje}</Markdown> <br />
           
           </p>
           </div>
@@ -121,5 +127,6 @@ export default function Coment() {
         <a href="/">Inicio</a>
       </button>
     </div>
+    </>
   );
 }
