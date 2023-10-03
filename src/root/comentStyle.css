@@ -71,3 +71,13 @@ body {
     font-size: 30px;
     box-shadow: 5px 5px 5px grey;
 }
+.imagen2 {
+    width: 100px;
+    position: absolute;
+    right: 50px;
+}
+.imagen {
+    width:100px;
+    margin-top: 5px;
+    margin-left: 50px;
+}
