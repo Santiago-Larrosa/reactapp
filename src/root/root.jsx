@@ -31,11 +31,13 @@ export default function Root() {
   return (
     <>
     <header className="Head">
-    <img src=".\SRC\root\520648.png" alt="mensaje" className="imagen" />
-      <h1 className="AlgunTitulo">Comentar</h1>
+    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
+    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
+      
     </header>
-      <div id="sidebar">
-        <h1 className="titulos">COMENTAR</h1>
+    <div className="UnaCosa"></div>
+      <div className="sidebar">
+      
         <div>
          
           <form method="post">
@@ -44,19 +46,17 @@ export default function Root() {
         </div>
         <nav>
          
-              <a href={`/App`} className="Create"><i>CREAR POST</i></a>
+              
            
           </nav>
-          <div>
-          <h2 className="subtitulo1">LISTA DE POST</h2>
-          <h2 className="subtitulo2">LISTA DE POST</h2>
-        <h2 className="subtitulo">LISTA DE POST</h2>
+          <div className="SideBar">
+      
         <ul>
-        
+        <div className="UnaCosa"><h1></h1></div>
         
         {comentarios.map((comentario, index) => (
   <div key={index} className="Post">
-    <h2 className="tituloPost">{comentario.nombre} </h2><p>{comentario.mensaje}</p>  <p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
+    <h2 className="tituloPost">{comentario.nombre} </h2> <h1>{comentario.Titulo}</h1><p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
     <button onClick={() => HandleClick(comentario.id)} className="Boton">
   <a onClick={()=>console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>COMENTAR</a>
 </button>
