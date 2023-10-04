@@ -1,5 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
 }
 .titulazo {
     font-size: 100px;
@@ -25,46 +26,56 @@ body {
     left:220px;
 }
 .PostComent {
-    color:white;
-    background-color: rgb(13, 156, 84);
+    color:rgb(126, 124, 124);
+    text-align: center;
+    box-shadow: 10px 10px 10px grey;
     font-size: 30px;
     opacity: 75%;
     width:100%;
-    border-radius: 10px;
-    margin-top:200px ;
+    border-radius: 40px;
     box-shadow: 10px 10px 10px grey;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
 }
 .InNom{
     border-radius: 10px;
-    border-color: grey;
+    background-color: rgb(202, 200, 200);
+    border-color: rgb(182, 180, 180);
     color:grey;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     height: 50px;
-    width: 400px;
+    width: 50%;
     box-shadow: 5px 5px 5px grey;
+    margin: 20px;
 }
 .InMens{
     border-radius: 10px;
-    border-color: grey;
+    background-color: rgb(202, 200, 200);
+    border-color: rgb(182, 180, 180);
     color:grey;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
     height: 150px;
-    width: 700px;
+    width: 90%;
     box-shadow: 5px 5px 5px grey;
+    margin: 20px;
 }
 .Botonation {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 30px;
-    color: rgb(28, 182, 143);
+    color:grey;
+    margin-left: 20px;
+    box-shadow: 5px 5px 5px grey;
 }
 .Coment {
     font-size: 28px;
-    color: white;
-    background-color: rgb(28, 182, 143);
+    color: grey;
+    background-color: #dfdede;
+    width: 95%;
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px grey;
+    margin-bottom: 10px;
 }
 .botonsito {
     color: rgb(28, 182, 143);
@@ -76,8 +87,23 @@ body {
     position: absolute;
     right: 50px;
 }
-.imagen {
+.imagen1 {
     width:100px;
     margin-top: 5px;
     margin-left: 50px;
+}
+.ElSuperDiv {
+    width:100%;
+    position: absolute;
+}
+.negro {
+    color:black;
+}
+.EsUnComentario{
+    margin-left: 20px;
+    font-size: 30px;
+
+}
+.AAA {
+    margin-left: 20px;
 }
