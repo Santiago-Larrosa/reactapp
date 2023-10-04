@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Appstyle.css';
-import imagen from"./13009.png";
-import imagen2 from"./13007.png";
+import imagen from"./13007.png";
+import imagen2 from"./13009.png";
 function TuComponente() {
   const [nombre, setNombre] = useState('');
   const [Titulo, setTitulo] = useState('');
