@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import "./comentStyle.css";
 import Markdown from 'react-markdown';
 import remarkGfm from 'remark-gfm'; 
-
+import imagen from"./13009.png";
+import imagen2 from"./13007.png";
 export default function Coment() {
   const { id } = useParams();
   const [comentariosDelComentario, setComentariosDelComentario] = useState([]);
@@ -66,18 +67,18 @@ export default function Coment() {
   return (
 <>
 <header className="Head">
-    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
-    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
+    <a href="/app"><img src={imagen2} alt="mensaje1" className="imagen1"/></a> 
+    <a href="/"><img src={imagen} alt="mensaje2" className="imagen2"/></a>
       
     </header>
 <div>
 
 
       {comentarioSeleccionado ? (
-        <div >
+        <div className="ElSuperDiv">
           <div className="PostComent">
           <p>
-            <b> {comentarioSeleccionado.nombre}</b><br />
+            <b className="negro"> {comentarioSeleccionado.nombre}</b><br />
             <Markdown remarkPlugins={[remarkGfm]}>{comentarioSeleccionado.mensaje}</Markdown> <br />
           
           </p>
@@ -109,23 +110,21 @@ export default function Coment() {
           </form>
 
           <div>
-            <h2>Comentarios:</h2>
-            <ul className="Coment">
+            <h2 className="EsUnComentario">Comentarios:</h2>
+            <div className="AAA">
               {comentariosDelComentario.map((comentario) => (
-                <li key={comentario.id}>
-                  <strong>{comentario.nombre}:</strong> {comentario.mensaje}
+                <li key={comentario.id} className="Coment">
+                  <strong >{comentario.nombre}</strong> <br></br>{comentario.mensaje}
                 </li>
               ))}
-            </ul>
+            </div>
           </div>
         </div>
       ) : (
         <p >El comentario no se encontró o no existe: {id}</p>
       )}
-
-      <button className="botonsito">
-        <a href="/">Inicio</a>
-      </button>
+   
+      
     </div>
     </>
   );
