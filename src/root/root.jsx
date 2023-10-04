@@ -35,7 +35,7 @@ export default function Root() {
     <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
       
     </header>
-    <div className="UnaCosa"></div>
+    
       <div className="sidebar">
       
         <div>
@@ -49,10 +49,11 @@ export default function Root() {
               
            
           </nav>
-          <div className="SideBar">
+          
+          <div className="EsteDiv">
       
         <ul>
-        <div className="UnaCosa"><h1></h1></div>
+       
         
         {comentarios.map((comentario, index) => (
   <div key={index} className="Post">
