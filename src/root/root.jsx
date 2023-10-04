@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import './rootstyle.css';
+import imagen from"./13007.png";
+import imagen2 from"./13009.png";
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
   const [go, setGo] = useState(null); 
@@ -31,8 +33,8 @@ export default function Root() {
   return (
     <>
     <header className="Head">
-    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
-    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
+    <a href="/app"><img src={imagen} alt="mensaje" className="imagen"  /></a> 
+    <a href="/"><img src={imagen2} alt="mensaje" className="imagen2" /></a>
       
     </header>
     
