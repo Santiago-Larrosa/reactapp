@@ -5,7 +5,7 @@
   
     color-scheme: light dark;
     color: rgba(99, 89, 89, 0.87);
-    background-color: #242424;
+    background-color: #dfdede;
   
     font-synthesis: none;
     text-rendering: optimizeLegibility;
@@ -65,23 +65,28 @@ body {
 .Post {
     
     
-    border-radius:40px;
+    border-radius: 40px;
     box-shadow: 10px 10px 10px grey;
     text-align: center;
-    text-align: center; /* Centra el contenido dentro del div */
     border: 1px solid #ccc;
-    
-
+    width:100%; 
+    margin-bottom: 30px;
+    margin-left:-10px   
     
   
     
 }
 .Boton {
     border-radius:10px;
+    text-align: center;
     width:150px;
     height: 50px;
     display: flex;
-  justify-content: flex-start;
+    margin: 30px;
+    box-shadow: 5px 5px 5px rgb(158, 158, 158);
+    background-color: #ccc;
+    color: antiquewhite;
+    text-decoration: none;
 
 }
 .Head {
@@ -108,4 +113,13 @@ body {
 }
 .UnaCosa{
     height: 100px;
+    width: 100%;
+}
+
+.sidebar {
+    width: 100%;
+        position: absolute;
+}
+.EsteDiv {
+    width: 100%;
 }
