@@ -6,6 +6,6 @@ export default defineConfig({
   plugins: [react()],
   build: {
     rollupOptions: {
-      external: ['react-markdown'],
+      external: ['react-markdown','remark-gfm'],
     },},
 })
