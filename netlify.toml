@@ -2,3 +2,13 @@
   from = "/*"
   to = "/index.html"
   status = 200
+  [build]
+  publish = "build" # Esto es donde se encuentra tu proyecto compilado
+
+[[plugins]]
+  package = "netlify-plugin-inline-functions"
+  [plugins.inputs]
+    entryFile = "src/functions/index.js"
+
+[[plugins]]
+  package = "@netlify/plugin-nextjs"
