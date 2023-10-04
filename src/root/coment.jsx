@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./comentStyle.css";
-import Markdown from './react-markdown';
-import remarkGfm from './remark-gfm'; 
+import Markdown from 'react-markdown';
+import remarkGfm from 'remark-gfm'; 
 import imagen from"./13009.png";
 import imagen2 from"./13007.png";
 export default function Coment() {
