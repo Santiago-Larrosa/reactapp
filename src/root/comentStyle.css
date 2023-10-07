@@ -107,3 +107,9 @@ body {
 .AAA {
     margin-left: 20px;
 }
+.Borrarr {
+    color: white;
+    margin: 5px;
+    background-color: red;
+    box-shadow: 5px 5px 5px rgb(233, 117, 117);
+}
