@@ -1,141 +1,73 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import "./comentStyle.css";
-//import Markdown from 'react-markdown';
-//import remarkGfm from 'remark-gfm'; 
-import imagen from"./13009.png";
-import imagen2 from"./13007.png";
+import { useEffect, useState } from 'react';
+import "./AdminStyle.css";
 
-export default function Coment() {
-  const { id } = useParams();
-  const [comentariosDelComentario, setComentariosDelComentario] = useState([]);
-  let idNumero = parseInt(id);
-  const [comentarios, setComentarios] = useState([]);
-  const [comentarioSeleccionado, setComentarioSeleccionado] = useState(null);
-  const [nombreComentario, setNombreComentario] = useState("");
-  const [mensajeComentario, setMensajeComentario] = useState("");
-  const [contadorID, setContadorID] = useState(1);
+function Admin() {
+  const [contraseña, setContraseña] = useState('');
   const [admin, setAdmin] = useState(false);
-  const [showButton, setShowButton] = useState(false);
-  useEffect (()=> {
-    const DownAdmin = localStorage.getItem("admin");
-    setAdmin(JSON.parse(DownAdmin));
-    setShowButton(JSON.parse(DownAdmin));
-    console.log(admin);
-  })
-
-  if (isNaN(idNumero)) {
-    console.error("ID proporcionado no es un número válido:", id);
-  }
+  const [mostrarMensaje, setMostrarMensaje] = useState(false);
+  const Con = '123';
 
   useEffect(() => {
-    const comentariosJson = localStorage.getItem("comentarios");
-    if (comentariosJson) {
-      const comentariosArray = JSON.parse(comentariosJson);
-      setComentarios(comentariosArray);
+    const AdminJson = localStorage.getItem('admin');
+    if (AdminJson) {
+      setAdmin(JSON.parse(AdminJson));
+      setMostrarMensaje(JSON.parse(AdminJson));
     }
 
-    if (id) {
-      const comentario = comentarios.find((comentario) => comentario.id === parseInt(id));
-      setComentarioSeleccionado(comentario);
+    const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
+    if (mostrarMensajeJson) {
+      setMostrarMensaje(JSON.parse(mostrarMensajeJson));
     }
-  }, [id, comentarios]);
+  }, []); 
 
-  useEffect(() => {
-    const comentariosDelComentarioJson = localStorage.getItem(`comentariosDelComentario-${id}`);
-    if (comentariosDelComentarioJson) {
-      const comentariosDelComentarioArray = JSON.parse(comentariosDelComentarioJson);
-      setComentariosDelComentario(comentariosDelComentarioArray);
-    }
-  }, [id]);
-
-  const handleAgregarComentario = (e) => {
+  const HandleSubmit = (e) => {
     e.preventDefault();
-
-    const nuevoComentario = {
-      nombre: nombreComentario,
-      mensaje: mensajeComentario,
-      id: `${id}-${contadorID}`, // Agrega un sufijo al ID
-    };
-
-    setContadorID(contadorID + 1);
-
-    const nuevosComentariosDelComentario = [...comentariosDelComentario, nuevoComentario];
-    setComentariosDelComentario(nuevosComentariosDelComentario);
-    setNombreComentario("");
-    setMensajeComentario("");
-
-    localStorage.setItem(`comentariosDelComentario-${id}`, JSON.stringify(nuevosComentariosDelComentario));
+    if (contraseña === Con) {
+      setAdmin(true);
+      localStorage.setItem('admin', JSON.stringify(true));
+      setMostrarMensaje(true); 
+      localStorage.setItem('mostrarMensaje', JSON.stringify(true));
+    } else {
+      setAdmin(false);
+      localStorage.removeItem('admin');
+      setMostrarMensaje(false); 
+      localStorage.removeItem('mostrarMensaje');
+    }
+    setContraseña('');
   };
 
-  const handleBorrarComentario = (comentarioId) => {
-    // Filtra los comentarios relacionados para eliminar el comentario con el ID dado
-    const comentariosActualizados = comentariosDelComentario.filter((comentario) => comentario.id !== comentarioId);
-    setComentariosDelComentario(comentariosActualizados);
-    // Actualiza el almacenamiento local
-    localStorage.setItem(`comentariosDelComentario-${id}`, JSON.stringify(comentariosActualizados));
+  const Boton = () => {
+    setAdmin(false);
+    setMostrarMensaje(false);
+    localStorage.removeItem('admin');
+    localStorage.removeItem('mostrarMensaje');
   };
 
   return (
     <>
-      <header className="Head">
-        <a href="/app"><img src={imagen2} alt="mensaje1" className="imagen1"/></a> 
-        <a href="/"><img src={imagen} alt="mensaje2" className="imagen2"/></a>
-      </header>
-      <div>
-        {comentarioSeleccionado ? (
-          <div className="ElSuperDiv">
-            <div className="PostComent">
-              <p>
-                <b className="negro"> {comentarioSeleccionado.nombre}</b><br />
-                { /*<Markdown remarkPlugins={[remarkGfm]}>{comentarioSeleccionado.mensaje}</Markdown>*/} <br />
-                <p>{comentarioSeleccionado.mensaje}</p>
-              </p>
-            </div>
-
-            <form onSubmit={handleAgregarComentario}>
-              <div>
-                <label htmlFor="nombre"></label>
-                <input
-                  className="InNom"
-                  placeholder="Nombre"
-                  type="text"
-                  id="nombre"
-                  value={nombreComentario}
-                  onChange={(e) => setNombreComentario(e.target.value)}
-                />
-              </div>
-              <div>
-                <label htmlFor="mensaje"></label>
-                <textarea
-                  placeholder="Mensaje"
-                  className="InMens"
-                  id="mensaje"
-                  value={mensajeComentario}
-                  onChange={(e) => setMensajeComentario(e.target.value)}
-                />
-              </div>
-              <button className="Botonation">Enviar Comentario</button>
-            </form>
-
-            <div>
-              <h2 className="EsUnComentario">Comentarios:</h2>
-              <div className="AAA">
-                {comentariosDelComentario.map((comentario) => (
-                  <li key={comentario.id} className="Coment">
-                    <strong >{comentario.nombre}</strong> <br></br>{comentario.mensaje}<br></br>
-                    {showButton && (
-                      <button onClick={() => handleBorrarComentario(comentario.id)} className="Borrarr">Borrar</button>
-                    )}
-                  </li>
-                ))}
-              </div>
-            </div>
-          </div>
-        ) : (
-          <p >El comentario no se encontró o no existe: {id}</p>
-        )}
-      </div>
+      <form onSubmit={HandleSubmit}>
+        <div>
+          <label className="contraseña" htmlFor="contraseña"></label>
+          <input
+            className='InContraseña'
+            type="text"
+            id="contraseña"
+            placeholder='Contraseña'
+            value={contraseña}
+            onChange={(e) => setContraseña(e.target.value)}
+          />
+          <button type='submit' className='botonor'>Enviar</button>
+        </div>
+      </form>
+      <button className='botonor2'><a className='link' href="/">Ir a Inicio</a></button>
+      {mostrarMensaje && (
+        <div>
+          <h1 className='comprobacion'>Permiso Concedido</h1>
+          <button className='botonor3' onClick={Boton}>Cerrar sesión</button>
+        </div>
+      )}
     </>
   );
 }
+
+export default Admin;
