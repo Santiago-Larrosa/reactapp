@@ -7,18 +7,34 @@ function Admin() {
   const [mostrarMensaje, setMostrarMensaje] = useState(false);
   const Con = '123';
 
- 
+  useEffect(() => {
+    const AdminJson = localStorage.getItem('admin');
+    if (AdminJson) {
+      const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
+      setAdmin(JSON.parse(AdminJson));
+      setMostrarMensaje(JSON.parse(mostrarMensajeJson));
+
+    }
+
+    const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
+    if (mostrarMensajeJson) {
+      setMostrarMensaje(JSON.parse(mostrarMensajeJson));
+    }
+  }, []); 
+
   const HandleSubmit = (e) => {
     e.preventDefault();
     if (contraseña === Con) {
-      setAdmin(true); 
-      localStorage.setItem('admin', JSON.stringify(true)); 
+      setAdmin(true);
+      localStorage.setItem('admin', JSON.stringify(true));
+      setMostrarMensaje(true); 
+      localStorage.setItem('mostrarMensaje', JSON.stringify(true));
     } else {
-      setAdmin(false); 
-      localStorage.removeItem('admin'); 
+      setAdmin(false);
+      localStorage.removeItem('admin');
+      setMostrarMensaje(false); 
+      localStorage.removeItem('mostrarMensaje');
     }
-    setMostrarMensaje(true);
-    console.log(admin);
     setContraseña('');
   };
 
@@ -26,6 +42,7 @@ function Admin() {
     setAdmin(false);
     setMostrarMensaje(false);
     localStorage.removeItem('admin');
+    localStorage.removeItem('mostrarMensaje');
   };
 
   return (
@@ -42,12 +59,10 @@ function Admin() {
             onChange={(e) => setContraseña(e.target.value)}
           />
           <button type='submit' className='botonor'>Enviar</button>
-        
         </div>
-        
       </form>
-      <button className='botonor2'><a className='link' href="/">Ir a Inicio</a></button> 
-      {mostrarMensaje && ( 
+      <button className='botonor2'><a className='link' href="/">Ir a Inicio</a></button>
+      {mostrarMensaje && (
         <div>
           <h1 className='comprobacion'>Permiso Concedido</h1>
           <button className='botonor3' onClick={Boton}>Cerrar sesión</button>
