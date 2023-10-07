@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from "react";
 import './rootstyle.css';
-import imagen from"./13007.png";
-import imagen2 from"./13009.png";
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
   const [go, setGo] = useState(null); 
+  const [admin, setAdmin] = useState(false);
+  const [showButton, setShowButton] = useState(false);
+  const [borrar, setBorrar]= useState('');
+  useEffect (()=> {
+    const DownAdmin = localStorage.getItem("admin");
+    setAdmin(JSON.parse(DownAdmin));
+    setShowButton(JSON.parse(DownAdmin));
+    console.log(admin);
+  })
+
  
 
 
-  const HandleClick = (id) => {
-    setGo(id);
-    
-  };
+  
+ 
+  
 
   useEffect(() => {
     const comentariosJson = localStorage.getItem("comentarios");
@@ -28,13 +35,24 @@ export default function Root() {
     }
   }, []);
     
- 
+ const onButtom = () => {
+  const idBorrar = JSON.getItem(comentarios);
+  setBorrar(comentarios.id);
+  console.log(borrar);
+
+ }
+ const HandleClick = (id) => {
+  // Filtra el comentario principal y todos los comentarios vinculados
+  const updatedComentarios = comentarios.filter((comentario) => comentario.id !== id);
+  setComentarios(updatedComentarios);
+  localStorage.setItem("comentarios", JSON.stringify(updatedComentarios));
+};
 
   return (
     <>
     <header className="Head">
-    <a href="/app"><img src={imagen} alt="mensaje" className="imagen"  /></a> 
-    <a href="/"><img src={imagen2} alt="mensaje" className="imagen2" /></a>
+    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
+    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
       
     </header>
     
@@ -53,18 +71,19 @@ export default function Root() {
           </nav>
           
           <div className="EsteDiv">
-      
         <ul>
-       
-        
-        {comentarios.map((comentario, index) => (
-  <div key={index} className="Post">
-    <h2 className="tituloPost">{comentario.nombre} </h2> <h1>{comentario.Titulo}</h1><p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
-    <button onClick={() => HandleClick(comentario.id)} className="Boton">
-  <a onClick={()=>console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>COMENTAR</a>
-</button>
-
-  </div>
+          {comentarios.map((comentario, index) => (
+            <div key={index} className="Post">
+              <h2 className="">{comentario.nombre}</h2>
+              <h1 className="TituloPost">{comentario.Titulo}</h1>
+              <p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
+              <button className="Boton">
+                <a onClick={() => console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>COMENTAR</a> </button>
+                {showButton && (
+                  <button className="Borrar" onClick={() => HandleClick(comentario.id)} >BORRAR</button>
+                )}
+             
+            </div>
 ))}
   
         </ul>
