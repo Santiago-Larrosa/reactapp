@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './Appstyle.css';
-import imagen from"./13007.png";
-import imagen2 from"./13009.png";
+
 function TuComponente() {
   const [nombre, setNombre] = useState('');
   const [Titulo, setTitulo] = useState('');
@@ -9,35 +8,41 @@ function TuComponente() {
   const [comentarios, setComentarios] = useState([]);
   const fechaInicial = new Date();
   const [hora, sethora] = useState(fechaInicial);
+const [contador, setContador] = useState(() => {
+  // Intenta obtener el contador almacenado en localStorage
+  const storedContador = localStorage.getItem('contador');
   
-
+  // Si no hay un contador en localStorage, inicializa con 1
+  return storedContador ? parseInt(storedContador) : 1;
+});
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const nuevahora = new Date();
-        sethora(nuevahora);
-      const nuevahoras=(nuevahora.getHours().toString().padStart(2,0));  
-      const nuevaminuto=(nuevahora.getMinutes().toString().padStart(2,0));  
-      const nuevasegundos=(nuevahora.getSeconds().toString().padStart(2,0));  
-    const nuevoId = comentarios.length + 1;
-    
+    sethora(nuevahora);
+    const nuevahoras = nuevahora.getHours().toString().padStart(2, '0');
+    const nuevaminuto = nuevahora.getMinutes().toString().padStart(2, '0');
+    const nuevasegundos = nuevahora.getSeconds().toString().padStart(2, '0');
+
     const nuevoComentario = {
       nombre,
       mensaje,
       Titulo,
-      id: nuevoId,
-      hora:(nuevahoras),
-      minutos:(nuevaminuto),
-      segundos:(nuevasegundos)
-
+      id: contador, // Asigna el ID del comentario usando el contador
+      hora: nuevahoras,
+      minutos: nuevaminuto,
+      segundos: nuevasegundos,
     };
+    setContador((prevContador) => prevContador + 1);
 
+    // Actualiza el contador en localStorage
+    localStorage.setItem('contador', contador + 1);
     setComentarios([...comentarios, nuevoComentario]);
+    setContador(contador + 1); // Incrementa el contador para el próximo comentario
     setNombre('');
     setMensaje('');
     setTitulo('');
   };
-
   const saveComentarios = () => {
     localStorage.setItem('comentarios', JSON.stringify(comentarios));
   };
@@ -58,8 +63,8 @@ function TuComponente() {
   return (
     <>
      <header className="Head">
-    <a href="/app"><img src={imagen} alt="mensaje" className="imagen"  /></a> 
-    <a href="/"><img src={imagen2} alt="mensaje" className="imagen2" /></a>
+    <a href="/app"><img src=".\SRC\root\13007.png" alt="mensaje" className="imagen"  /></a> 
+    <a href="/"><img src=".\SRC\root\13009.png" alt="mensaje" className="imagen2" /></a>
       
     </header>
     <div>
@@ -98,7 +103,7 @@ function TuComponente() {
             onChange={(e) => setMensaje(e.target.value)}
           />
         </div>
-        <button className='botonazo'>Crear Post</button>
+        <button className='botonazo'>Crear <br></br>Post</button>
      
       </form>
       
