@@ -10,6 +10,7 @@ function Admin() {
   useEffect(() => {
     const AdminJson = localStorage.getItem('admin');
     if (AdminJson) {
+      console.log(AdminJson);
       const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
       setAdmin(JSON.parse(AdminJson));
       setMostrarMensaje(JSON.parse(mostrarMensajeJson));
@@ -18,6 +19,8 @@ function Admin() {
 
     const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
     if (mostrarMensajeJson) {
+
+      console.log(AdminJson);
       setMostrarMensaje(JSON.parse(mostrarMensajeJson));
     }
   }, []); 
