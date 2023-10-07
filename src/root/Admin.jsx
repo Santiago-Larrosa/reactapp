@@ -14,6 +14,8 @@ function Admin() {
       const mostrarMensajeJson = localStorage.getItem('mostrarMensaje');
       setAdmin(JSON.parse(AdminJson));
       setMostrarMensaje(JSON.parse(mostrarMensajeJson));
+      setMostrarMensaje(AdminJson);
+
 
     }
 
