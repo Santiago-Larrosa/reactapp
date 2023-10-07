@@ -11,10 +11,10 @@ function TuComponente() {
   const fechaInicial = new Date();
   const [hora, sethora] = useState(fechaInicial);
 const [contador, setContador] = useState(() => {
-  // Intenta obtener el contador almacenado en localStorage
+
   const storedContador = localStorage.getItem('contador');
   
-  // Si no hay un contador en localStorage, inicializa con 1
+
   return storedContador ? parseInt(storedContador) : 1;
 });
   const handleSubmit = (e) => {
@@ -30,7 +30,7 @@ const [contador, setContador] = useState(() => {
       nombre,
       mensaje,
       Titulo,
-      id: contador, // Asigna el ID del comentario usando el contador
+      id: contador, 
       hora: nuevahoras,
       minutos: nuevaminuto,
       segundos: nuevasegundos,
@@ -40,7 +40,7 @@ const [contador, setContador] = useState(() => {
     // Actualiza el contador en localStorage
     localStorage.setItem('contador', contador + 1);
     setComentarios([...comentarios, nuevoComentario]);
-    setContador(contador + 1); // Incrementa el contador para el próximo comentario
+    setContador(contador + 1);
     setNombre('');
     setMensaje('');
     setTitulo('');
