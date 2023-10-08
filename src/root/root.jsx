@@ -14,9 +14,7 @@ export default function Root() {
     if (DownAdmin){
       setShowButton(DownAdmin);
     }
-    else {
-      setShowButton(false);
-    }
+   
     setShowButton(JSON.parse(DownAdmin));
     console.log(admin);
   })
