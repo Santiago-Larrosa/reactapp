@@ -144,4 +144,12 @@ body {
     background-color: #c9c8c8;
     border-radius: 20px;
     box-shadow: 10px 10px 10px grey;
+    text-align: center;
+}
+.Cruz {
+    width:10px;
+    height:10px;
+}
+.algo {
+    font-size: 40px;
 }
