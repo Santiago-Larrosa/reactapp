@@ -131,7 +131,17 @@ body {
     display: flex;
     margin: 30px;
     box-shadow: 5px 5px 5px red;
-    background-color:red;
+    background-color:red;   
     color: antiquewhite;
     text-decoration: none;
+}
+.Reloj {
+    position: fixed;
+    right: 50px;
+    bottom:50px;
+    height: 200px;
+    width: 300px;
+    background-color: #c9c8c8;
+    border-radius: 20px;
+    box-shadow: 10px 10px 10px grey;
 }
