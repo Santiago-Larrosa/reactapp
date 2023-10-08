@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import './rootstyle.css';
-import imagen3 from './13006.png'
+import imagen3 from './13006.png';
+import axios from "axios";
+
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
   const [go, setGo] = useState(null);
@@ -9,40 +11,26 @@ export default function Root() {
   const [showDiv, setShowDiv] = useState(true);
   const [hora, setHora] = useState(new Date()); 
   const [horaRenderizada, setHoraRenderizada] = useState(new Date()); 
+  const [weatherData, setWeatherData] = useState(null); // Para almacenar los datos del clima
+console.log(import.meta.env.VITE_API_KEY);  
   const Mostrar = () => {
     setShowDiv(false);
     console.log(showDiv);
   };
-
 
   const updateHora = () => {
     const nuevaFecha = new Date();
     setHora(nuevaFecha);
   };
 
-  useEffect(() => {
-    // Llama a updateHora inmediatamente para obtener la hora inicial
-    updateHora();
-    
-    // Configura un temporizador para actualizar la hora cada segundo
-    const timerId = setInterval(updateHora, 1000);
-
-    // Limpia el temporizador cuando el componente se desmonta
-    return () => clearInterval(timerId);
-  }, []); // El segundo argumento del useEffect ([]) indica que se ejecuta solo una vez al montar el componente
-
   const renderHora = () => {
     return (
       <h1>
         {hora.getHours().toString().padStart(2, '0')}:
-        {hora.getMinutes().toString().padStart(2, '0')}:
-        {hora.getSeconds().toString().padStart(2, '0')}
+        {hora.getMinutes().toString().padStart(2, '0')}
       </h1>
     );
   };
-
-  const [borrar, setBorrar] = useState('');
-
 
   useEffect(() => {
     const DownAdmin = localStorage.getItem("admin");
@@ -55,7 +43,6 @@ export default function Root() {
     }
 
     setShowButton(JSON.parse(DownAdmin));
-   
   }, [admin]);
 
   useEffect(() => {
@@ -74,18 +61,24 @@ export default function Root() {
     }
   }, []);
 
-  const onButtom = () => {
-    const idBorrar = JSON.getItem(comentarios);
-    setBorrar(comentarios.id);
+  useEffect(() => {
     
-  }
+    const apiKey = "35d752315cfa8e8598f5b78f57533ae8"; 
+    axios
+      .get(`https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires&appid=${apiKey}`)
+      .then((response) => {
+        setWeatherData(response.data);
+      })
+      .catch((error) => {
+        console.error("Error al obtener datos del clima:", error);
+      });
 
-  const HandleClick = (id) => {
-    // Filtra el comentario principal y todos los comentarios vinculados
-    const updatedComentarios = comentarios.filter((comentario) => comentario.id !== id);
-    setComentarios(updatedComentarios);
-    localStorage.setItem("comentarios", JSON.stringify(updatedComentarios));
-  };
+    // Actualiza la hora cada segundo
+    const timerId = setInterval(updateHora, 1000);
+
+    // Limpia el temporizador cuando el componente se desmonta
+    return () => clearInterval(timerId);
+  }, []);
 
   return (
     <>
@@ -99,10 +92,21 @@ export default function Root() {
           <form method="post"></form>
         </div>
         <nav></nav>
-      {showDiv && (  <div className="Reloj">
-            <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz"></img>
+        {showDiv && (
+          <div className="Reloj">
+            <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz" /><br />
+            <h1>Hola de nuevo!</h1>
+            <h2>Son Las:</h2>
             {renderHora()}
-          </div>)}
+            {weatherData && (
+              <div>
+                <h2>Clima en Buenos Aires:</h2>
+                <p>Temperatura: {Math.round((weatherData.main.temp)-273.15)} °C</p>
+                <p>Descripción: {weatherData.weather[0].description}</p>
+              </div>
+            )}
+          </div>
+        )}
         <div className="EsteDiv">
           <ul>
             {comentarios.map((comentario, index) => (
