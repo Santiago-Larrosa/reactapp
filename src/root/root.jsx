@@ -11,6 +11,12 @@ export default function Root() {
   useEffect (()=> {
     const DownAdmin = localStorage.getItem("admin");
     setAdmin(JSON.parse(DownAdmin));
+    if (DownAdmin){
+      setShowButton(DownAdmin);
+    }
+    else {
+      setShowButton(false);
+    }
     setShowButton(JSON.parse(DownAdmin));
     console.log(admin);
   })
