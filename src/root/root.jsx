@@ -1,28 +1,48 @@
 import React, { useState, useEffect } from "react";
 import './rootstyle.css';
-
+import imagen3 from './13006.png'
 export default function Root() {
   const [comentarios, setComentarios] = useState([]);
   const [go, setGo] = useState(null);
   const [admin, setAdmin] = useState(false);
   const [showButton, setShowButton] = useState(false);
-  
- 
-const [hora, setHora] = useState(new Date()); // Inicializa con la hora actual
-  const [borrar, setBorrar] = useState('');
+  const [showDiv, setShowDiv] = useState(true);
+  const [hora, setHora] = useState(new Date()); 
+  const [horaRenderizada, setHoraRenderizada] = useState(new Date()); 
+  const Mostrar = () => {
+    setShowDiv(false);
+    console.log(showDiv);
+  };
 
-  // Función para actualizar la hora cada segundo
-  function tick() {
+
+  const updateHora = () => {
     const nuevaFecha = new Date();
     setHora(nuevaFecha);
-  }
+  };
 
   useEffect(() => {
-    const timerId = setInterval(tick, 1000);
+    // Llama a updateHora inmediatamente para obtener la hora inicial
+    updateHora();
+    
+    // Configura un temporizador para actualizar la hora cada segundo
+    const timerId = setInterval(updateHora, 1000);
 
-    // Limpieza del intervalo al desmontar el componente
+    // Limpia el temporizador cuando el componente se desmonta
     return () => clearInterval(timerId);
-  }, []);
+  }, []); // El segundo argumento del useEffect ([]) indica que se ejecuta solo una vez al montar el componente
+
+  const renderHora = () => {
+    return (
+      <h1>
+        {hora.getHours().toString().padStart(2, '0')}:
+        {hora.getMinutes().toString().padStart(2, '0')}:
+        {hora.getSeconds().toString().padStart(2, '0')}
+      </h1>
+    );
+  };
+
+  const [borrar, setBorrar] = useState('');
+
 
   useEffect(() => {
     const DownAdmin = localStorage.getItem("admin");
@@ -35,8 +55,7 @@ const [hora, setHora] = useState(new Date()); // Inicializa con la hora actual
     }
 
     setShowButton(JSON.parse(DownAdmin));
-    console.log(showButton);
-    console.log(admin);
+   
   }, [admin]);
 
   useEffect(() => {
@@ -58,7 +77,7 @@ const [hora, setHora] = useState(new Date()); // Inicializa con la hora actual
   const onButtom = () => {
     const idBorrar = JSON.getItem(comentarios);
     setBorrar(comentarios.id);
-    console.log(borrar);
+    
   }
 
   const HandleClick = (id) => {
@@ -80,13 +99,10 @@ const [hora, setHora] = useState(new Date()); // Inicializa con la hora actual
           <form method="post"></form>
         </div>
         <nav></nav>
-        <div className="Reloj">
-          <h1>
-            {hora.getHours().toString().padStart(2,0)}:
-            {hora.getMinutes().toString().padStart(2,0)}:
-            {hora.getSeconds().toString().padStart(2,0)}
-          </h1>
-        </div>
+      {showDiv && (  <div className="Reloj">
+            <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz"></img>
+            {renderHora()}
+          </div>)}
         <div className="EsteDiv">
           <ul>
             {comentarios.map((comentario, index) => (
