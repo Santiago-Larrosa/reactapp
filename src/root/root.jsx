@@ -18,6 +18,7 @@ export default function Root() {
       setShowButton(admin);
     }
     setShowButton(JSON.parse(DownAdmin));
+    console.log(showButton);
     console.log(admin);
   })
 
