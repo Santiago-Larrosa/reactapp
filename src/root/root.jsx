@@ -13,7 +13,7 @@ export default function Root() {
   const [showDiv, setShowDiv] = useState(true);
   const [hora, setHora] = useState(new Date()); 
   const [horaRenderizada, setHoraRenderizada] = useState(new Date()); 
-  const [weatherData, setWeatherData] = useState(null); // Para almacenar los datos del clima
+  const [weatherData, setWeatherData] = useState(null);
 console.log(import.meta.env.VITE_API_KEY);  
   const Mostrar = () => {
     setShowDiv(false);
@@ -75,14 +75,14 @@ console.log(import.meta.env.VITE_API_KEY);
         console.error("Error al obtener datos del clima:", error);
       });
 
-    // Actualiza la hora cada segundo
+ 
     const timerId = setInterval(updateHora, 1000);
 
-    // Limpia el temporizador cuando el componente se desmonta
+    
     return () => clearInterval(timerId);
   }, []);
    const HandleClick = (id) => {
-    // Aquí debes eliminar el comentario del estado y actualizar el localStorage
+  
     const updatedComentarios = comentarios.filter((comentario) => comentario.id !== id);
     setComentarios(updatedComentarios);
     localStorage.setItem("comentarios", JSON.stringify(updatedComentarios));
