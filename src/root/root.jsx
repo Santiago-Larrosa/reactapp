@@ -81,6 +81,12 @@ console.log(import.meta.env.VITE_API_KEY);
     // Limpia el temporizador cuando el componente se desmonta
     return () => clearInterval(timerId);
   }, []);
+   const HandleClick = (id) => {
+    // Aquí debes eliminar el comentario del estado y actualizar el localStorage
+    const updatedComentarios = comentarios.filter((comentario) => comentario.id !== id);
+    setComentarios(updatedComentarios);
+    localStorage.setItem("comentarios", JSON.stringify(updatedComentarios));
+  };
 
   return (
     <>
