@@ -25,6 +25,9 @@ console.log(import.meta.env.VITE_API_KEY);
     setHora(nuevaFecha);
   };
 
+
+  
+
   const renderHora = () => {
     return (
       <h1>
@@ -92,6 +95,7 @@ console.log(import.meta.env.VITE_API_KEY);
     <>
       <header className="Head">
         <a href="/app"><img src={imagen} alt="mensaje" className="imagen" /></a>
+        {admin ? <h1 className="admin">MODO ADMIN ACTIVADO</h1> : <div></div> }
         <a href="/"><img src={imagen2} alt="mensaje" className="imagen2" /></a>
       </header>
 
@@ -123,7 +127,7 @@ console.log(import.meta.env.VITE_API_KEY);
                 <h1 className="TituloPost">{comentario.Titulo}</h1>
                 <p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
                 <button className="Boton">
-                  <a onClick={() => console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>COMENTAR</a>
+                  <a onClick={() => console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>VER MAS</a>
                 </button>
                 {showButton && (
                   <button className="Borrar" onClick={() => HandleClick(comentario.id)}>BORRAR</button>
