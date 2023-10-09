@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Appstyle.css';
 import imagen from"./13009.png";
+import { useNavigate } from "react-router-dom";
 import imagen2 from"./13007.png";
 
 function TuComponente() {
@@ -10,6 +11,7 @@ function TuComponente() {
   const [comentarios, setComentarios] = useState([]);
   const fechaInicial = new Date();
   const [hora, sethora] = useState(fechaInicial);
+  const navigate = useNavigate();
 const [contador, setContador] = useState(() => {
 
   const storedContador = localStorage.getItem('contador');
@@ -17,6 +19,10 @@ const [contador, setContador] = useState(() => {
 
   return storedContador ? parseInt(storedContador) : 1;
 });
+
+
+
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -105,7 +111,9 @@ const [contador, setContador] = useState(() => {
             onChange={(e) => setMensaje(e.target.value)}
           />
         </div>
-        <button className='botonazo'>Crear <br></br>Post</button>
+        
+        <button className='botonazo' onClick={() => navigate("/")}>Crear <br></br>Post</button>
+        
      
       </form>
       
@@ -115,6 +123,9 @@ const [contador, setContador] = useState(() => {
 }
 
 export default TuComponente;
+
+
+
 
 
 
