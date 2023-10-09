@@ -95,8 +95,8 @@ console.log(import.meta.env.VITE_API_KEY);
     <>
       <header className="Head">
         <a href="/app"><img src={imagen} alt="mensaje" className="imagen" /></a>
-        {admin ? <h1 className="admin">MODO ADMIN ACTIVADO</h1> : <div></div> }
         <a href="/"><img src={imagen2} alt="mensaje" className="imagen2" /></a>
+        {admin ? <h1 className="admin">MODO ADMIN ACTIVADO</h1> : <div></div> }
       </header>
 
       <div className="sidebar">
