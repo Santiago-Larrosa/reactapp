@@ -160,3 +160,9 @@ body {
 .algo {
     font-size: 40px;
 }
+
+.admin {
+    font: size 60px;
+    color: red;
+    
+}
