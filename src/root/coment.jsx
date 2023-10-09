@@ -55,7 +55,7 @@ export default function Coment() {
     const nuevoComentario = {
       nombre: nombreComentario,
       mensaje: mensajeComentario,
-      id: `${id}-${contadorID}`, // Agrega un sufijo al ID
+      id: `${id}-${contadorID}`, 
     };
 
     setContadorID(contadorID + 1);
@@ -69,10 +69,10 @@ export default function Coment() {
   };
 
   const handleBorrarComentario = (comentarioId) => {
-    // Filtra los comentarios relacionados para eliminar el comentario con el ID dado
+   
     const comentariosActualizados = comentariosDelComentario.filter((comentario) => comentario.id !== comentarioId);
     setComentariosDelComentario(comentariosActualizados);
-    // Actualiza el almacenamiento local
+
     localStorage.setItem(`comentariosDelComentario-${id}`, JSON.stringify(comentariosActualizados));
   };
 
