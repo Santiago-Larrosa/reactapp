@@ -127,7 +127,7 @@ console.log(import.meta.env.VITE_API_KEY);
                 <h1 className="TituloPost">{comentario.Titulo}</h1>
                 <p>{comentario.hora}:{comentario.minutos}:{comentario.segundos}</p>
                 <button className="Boton">
-                  <a onClick={() => console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>VER MAS</a>
+                  <a className="linkardo" onClick={() => console.log(comentario.id)} href={`/coment/${parseInt(comentario.id)}`}>VER MAS</a>
                 </button>
                 {showButton && (
                   <button className="Borrar" onClick={() => HandleClick(comentario.id)}>BORRAR</button>
