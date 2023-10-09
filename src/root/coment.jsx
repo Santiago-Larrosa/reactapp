@@ -88,7 +88,7 @@ export default function Coment() {
             <div className="PostComent">
               <p>
                 <b className="negro"> {comentarioSeleccionado.nombre}</b><br />
-                <Markdown remarkPlugins={[remarkGfm]}>{comentarioSeleccionado.mensaje}</Markdown> {<br />{/*comentarioSeleccionado.mensaje}*/}
+                <Markdown remarkPlugins={[remarkGfm]}>{comentarioSeleccionado.mensaje}</Markdown> {/*<br />{comentarioSeleccionado.mensaje}*/}
               </p>
             </div>
 
