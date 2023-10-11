@@ -124,7 +124,7 @@ const [contador, setContador] = useState(() => {
      
       </form>
       
-    </div> : <h1>Mensaje Enviado<h1>}
+    </div> : <h1>Mensaje Enviado</h1>}
     </>
   );
 }
