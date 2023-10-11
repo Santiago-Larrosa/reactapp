@@ -112,7 +112,7 @@ const [contador, setContador] = useState(() => {
           />
         </div>
         
-        <button className='botonazo' {/*onClick={() => navigate("/")}*/}>Crear <br></br>Post</button>
+        <button className='botonazo' >Crear <br></br>Post</button>
         
      
       </form>
