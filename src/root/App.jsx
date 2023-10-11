@@ -119,7 +119,7 @@ const [contador, setContador] = useState(() => {
           />
         </div>
         
-        <button className='botonazo' onClick((e)=>setButton(false)) >Crear <br></br>Post</button>
+        <button className='botonazo' onClick=((e)=>setButton(false)) >Crear <br></br>Post</button>
         
      
       </form>
