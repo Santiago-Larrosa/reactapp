@@ -12,6 +12,7 @@ function TuComponente() {
   const fechaInicial = new Date();
   const [hora, sethora] = useState(fechaInicial);
   const navigate = useNavigate();
+  const [button , setButton] = useState(true);
 const [contador, setContador] = useState(() => {
 
   const storedContador = localStorage.getItem('contador');
@@ -80,7 +81,8 @@ const [contador, setContador] = useState(() => {
     <a href="/"><img src={imagen} alt="mensaje" className="imagen2" /></a>
       
     </header>
-    <div>
+      { Button ? 
+      <div>
       
  
       <form onSubmit={handleSubmit}>
@@ -117,12 +119,12 @@ const [contador, setContador] = useState(() => {
           />
         </div>
         
-        <button className='botonazo' >Crear <br></br>Post</button>
+        <button className='botonazo' onClick((e)=>setButton(false)) >Crear <br></br>Post</button>
         
      
       </form>
       
-    </div>
+    </div> : <h1>Mensaje Enviado<h1>}
     </>
   );
 }
