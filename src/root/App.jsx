@@ -51,7 +51,7 @@ const [contador, setContador] = useState(() => {
     setNombre('');
     setMensaje('');
     setTitulo('');
-   
+   setButton(false);
   };
 
   const saveComentarios = () => {
@@ -119,7 +119,7 @@ const [contador, setContador] = useState(() => {
           />
         </div>
         
-        <button className='botonazo' onClick={(e)=>setButton(false)} >Crear <br></br>Post</button>
+        <button className='botonazo' >Crear <br></br>Post</button>
         
      
       </form>
