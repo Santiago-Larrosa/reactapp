@@ -81,7 +81,7 @@ const [contador, setContador] = useState(() => {
     <a href="/"><img src={imagen} alt="mensaje" className="imagen2" /></a>
       
     </header>
-      { Button ? 
+      { button ? 
       <div>
       
  
