@@ -50,11 +50,14 @@ const [contador, setContador] = useState(() => {
     setNombre('');
     setMensaje('');
     setTitulo('');
-   
+    irAHome();
   };
+  const irAHome= () => {
+      navigate("/");
+  }
   const saveComentarios = () => {
     localStorage.setItem('comentarios', JSON.stringify(comentarios));
-     navigate("/");
+   
   };
 
   useEffect(() => {
