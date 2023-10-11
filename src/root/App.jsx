@@ -63,8 +63,9 @@ const [contador, setContador] = useState(() => {
   useEffect(() => {
     if (comentarios.length) {
       saveComentarios();
+     navigate("/");
     }
-      navigate("/");
+     
   }, [comentarios]);
 
   useEffect(() => {
