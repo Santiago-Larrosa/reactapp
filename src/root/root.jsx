@@ -135,7 +135,7 @@ console.log(import.meta.env.VITE_API_KEY);
               </div>
             ))}
           </ul>
-        
+        </div>
       </div>
       <div id="detail"></div>
     </>
