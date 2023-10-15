@@ -104,7 +104,7 @@ console.log(import.meta.env.VITE_API_KEY);
           <form method="post"></form>
         </div>
         <nav></nav>
-        {showDiv && (
+        {/*     {showDiv && (
           <div className="Reloj">
             <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz" /><br />
             <h1>Hola de nuevo!</h1>
@@ -116,7 +116,7 @@ console.log(import.meta.env.VITE_API_KEY);
                 <p>Temperatura: {Math.round((weatherData.main.temp)-273.15)} °C</p>
                 <p>Descripción: {weatherData.weather[0].description}</p>
               </div>
-            )}
+            )}*/}
           </div>
         )}
         <div className="EsteDiv">
