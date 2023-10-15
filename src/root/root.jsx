@@ -102,7 +102,7 @@ console.log(import.meta.env.VITE_API_KEY);
       <div className="sidebar">
         <div>
           <form method="post"></form>
-          {/*  </div>
+           </div>
         <nav></nav>
          {showDiv && (
           <div className="Reloj">
@@ -117,7 +117,7 @@ console.log(import.meta.env.VITE_API_KEY);
                 <p>Descripción: {weatherData.weather[0].description}</p>
               </div>
             )}
-          </div>*/}
+          </div>
         )}
         <div className="EsteDiv">
           <ul>
