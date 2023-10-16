@@ -12,30 +12,12 @@ export default function Root() {
   const [showButton, setShowButton] = useState(false);
   const [showDiv, setShowDiv] = useState(true);
   const [hora, setHora] = useState(new Date()); 
-  const [horaRenderizada, setHoraRenderizada] = useState(new Date()); 
-  const [weatherData, setWeatherData] = useState(null);
-console.log(import.meta.env.VITE_API_KEY);  
-  const Mostrar = () => {
-    setShowDiv(false);
-    console.log(showDiv);
-  };
+ 
 
-  const updateHora = () => {
-    const nuevaFecha = new Date();
-    setHora(nuevaFecha);
-  };
 
 
   
 
-  const renderHora = () => {
-    return (
-      <h1>
-        {hora.getHours().toString().padStart(2, '0')}:
-        {hora.getMinutes().toString().padStart(2, '0')}
-      </h1>
-    );
-  };
 
   useEffect(() => {
     const DownAdmin = localStorage.getItem("admin");
@@ -66,24 +48,10 @@ console.log(import.meta.env.VITE_API_KEY);
     }
   }, []);
 
-  useEffect(() => {
-    
-    const apiKey = "35d752315cfa8e8598f5b78f57533ae8"; 
-    axios
-      .get(`https://api.openweathermap.org/data/2.5/weather?q=Buenos%20Aires&appid=${apiKey}`)
-      .then((response) => {
-        setWeatherData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error al obtener datos del clima:", error);
-      });
+ 
 
  
-    const timerId = setInterval(updateHora, 1000);
-
-    
-    return () => clearInterval(timerId);
-  }, []);
+   
    const HandleClick = (id) => {
   
     const updatedComentarios = comentarios.filter((comentario) => comentario.id !== id);
@@ -104,21 +72,7 @@ console.log(import.meta.env.VITE_API_KEY);
           <form method="post"></form>
            </div>
         <nav></nav>
-        {/*{showDiv && (
-          <div className="Reloj">
-            <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz" /><br />
-            <h1>Hola de nuevo!</h1>
-            <h2>Son Las:</h2>
-            {renderHora()}
-            {weatherData && (
-              <div>
-                <h2>Clima en Buenos Aires:</h2>
-                <p>Temperatura: {Math.round((weatherData.main.temp)-273.15)} °C</p>
-                <p>Descripción: {weatherData.weather[0].description}</p>
-              </div>
-            )}
-          </div>
-        )}*/}
+      
         <div className="EsteDiv">
           <ul>
             {comentarios.map((comentario, index) => (
