@@ -104,7 +104,7 @@ console.log(import.meta.env.VITE_API_KEY);
           <form method="post"></form>
            </div>
         <nav></nav>
-         {showDiv && (
+        {/*{showDiv && (
           <div className="Reloj">
             <img onClick={Mostrar} src={imagen3} className="Cruz" alt="Cruz" /><br />
             <h1>Hola de nuevo!</h1>
@@ -118,7 +118,7 @@ console.log(import.meta.env.VITE_API_KEY);
               </div>
             )}
           </div>
-        )}
+        )}*/}
         <div className="EsteDiv">
           <ul>
             {comentarios.map((comentario, index) => (
