@@ -44,7 +44,7 @@ const [contador, setContador] = useState(() => {
     };
     setContador((prevContador) => prevContador + 1);
 
-    // Actualiza el contador en localStorage
+  
     localStorage.setItem('contador', contador + 1);
     setComentarios([...comentarios, nuevoComentario]);
     setContador(contador + 1);
