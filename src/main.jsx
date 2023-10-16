@@ -9,7 +9,6 @@ import "./index.css";
 import Admin from"./root/Admin"
 import Root from "./root/root";
 import App from "./root/App";
-import Comentarios from "./root/comentarios";
 import Coment from "./root/coment";
 
 
@@ -21,10 +20,6 @@ const router = createBrowserRouter([
   {
     path: "App",
     element: <App />,
-  },
-  {
-    path: "comentarios",
-    element: <Comentarios />,
   },
   {
     path: "coment/:id", 
